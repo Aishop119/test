@@ -1,0 +1,1 @@
+imrotate(img,-15,'nearest');

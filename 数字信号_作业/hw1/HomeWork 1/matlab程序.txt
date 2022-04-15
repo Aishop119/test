@@ -1,0 +1,33 @@
+data_file = fopen('E:\SIAT\数字信号_作业\hw1\HomeWork 1\dat.bin','rb');
+data_arr = [];
+while ~feof(data_file)
+data = fread(data_file,3);
+num = (data(1)*256*256 + data(2)*256 + data(3));
+if (bitand(num, hex2dec('800000')))
+num = (num - 2^24);
+end
+num = num / 24;
+vol = num / (2^23 - 1) * 4.5;
+data_arr = [data_arr,vol ];
+end
+
+index = linspace(0,7.2,1800);
+plot(index,data_arr)
+xlabel('time')
+ylabel('voltage')
+
+me=mean(data_arr)
+
+va=var(data_arr)
+
+st=std(data_arr)
+
+rm=rms(data_arr)
+
+mo=mode(data_arr)
+
+med=median(data_arr)
+
+
+
+histogram(data_arr,21)
